@@ -1,0 +1,175 @@
+import { useEffect, useContext, useState } from 'react';
+import {
+  Container,
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Grid,
+} from '@mui/material';
+import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
+import CardProducto from '../CardProducto/CardProducto';
+
+const Home = () => {
+  const [selectedCategoriaPrincipal, setselectedCategoriaPrincipal] = useState(null);
+  const [numRows, setNumRows] = useState(3); // Inicia con 3 filas
+  const [selectedSubcategoria, setSelectedSubcategoria] = useState(null);
+  const [hasResults, setHasResults] = useState(true);
+  const [filteredResults, setFilteredResults] = useState([]);
+
+  const message = 'No hay resultados para esta búsqueda, toque Restaurar';
+
+  const handleShowMoreClick = () => {
+    setNumRows(numRows + 3); // Agrega 3 filas más
+  };
+
+  const handleSearch = () => {
+    // Lógica de búsqueda aquí
+    // Actualizar `hasResults` a `true` o `false` según corresponda
+    setHasResults(false);
+  };
+
+  const arrayObjetos = [
+    // Objeto actualizado
+  ];
+
+  const filteredObjetos = arrayObjetos.filter((objeto) => {
+    if (selectedCategoriaPrincipal === null) {
+      return true; // Si no se ha seleccionado una especialidad, mostrar todos los objetos
+    } else {
+      return objeto.catPrincipal === selectedCategoriaPrincipal; // Mostrar los objetos de la especialidad seleccionada
+    }
+  });
+
+  const renderResults = () => {
+    if (!hasResults) {
+      return <p>{message}</p>;
+    }
+
+    const rows = Math.ceil(filteredObjetos.length / 3);
+    const resultRows = [];
+
+    for (let i = 0; i < rows; i++) {
+      const start = i * 3;
+      const end = start + 3;
+      const rowItems = filteredObjetos.slice(start, end);
+
+      const row = (
+        <Grid container spacing={2}>
+          {rowItems.map((objeto) => (
+            <Grid item xs={4} key={objeto.id}>
+              <CardProducto objeto={objeto} />
+            </Grid>
+          ))}
+        </Grid>
+      );
+
+      resultRows.push(row);
+    }
+
+    return resultRows;
+  };
+
+  return (
+    <>
+      <Box
+        sx={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          '@media (max-width: 600px)': {
+            height: {
+              xs: '50vh',
+              sm: '60vh',
+              md: '70vh',
+              lg: '80vh',
+            },
+          },
+        }}
+      ></Box>
+      <Container
+        maxWidth="lg"
+        sx={{
+          minWidth: '300px',
+          width: '80%',
+          marginTop: '20%',
+          '@media (max-width: 600px)': {
+            height: {
+              xs: '50vh',
+              sm: '60vh',
+              md: '70vh',
+              lg: '80vh',
+            },
+          },
+        }}
+      >
+        <Box
+          m={2}
+          p={3}
+          boxShadow={3}
+          borderRadius={2}
+          backgroundColor="#c8e6c9"
+          sx={{ mb: '20%' }}
+        >
+          <h2>Resultados</h2>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: '1%', mb: '7%' }}>
+            <FormControl sx={{ minWidth: 120, mr: '5%' }}>
+              <InputLabel id="specialty-select-label">Categoría Principal</InputLabel>
+              <Select
+                labelId="specialty-select-label"
+                id="specialty-select"
+                value={selectedCategoriaPrincipal}
+                label="Especialidad"
+                onChange={(e) => setselectedCategoriaPrincipal(e.target.value)}
+                sx={{ minWidth: '260px' }}
+              >
+                <MenuItem value={null}>Todas</MenuItem>
+                <MenuItem value="Cardiología">Deportes</MenuItem>
+                <MenuItem value="Dermatología">Accesorios</MenuItem>
+                <MenuItem value="Pediatría">Indumentaria</MenuItem>
+                <MenuItem value="Oftalmologia">Portables</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl sx={{ minWidth: 120, ml: '5%', mr: '3%' }}>
+              <InputLabel id="specialty-select-label">Sub-categoría</InputLabel>
+              <Select
+                labelId="direction-select-label"
+                id="direction-select"
+                value={selectedSubcategoria}
+                label="Dirección"
+                onChange={(e) => setSelectedSubcategoria(e.target.value)}
+                sx={{ minWidth: '260px' }}
+              >
+                <MenuItem value={null}>Con envío normal</MenuItem>
+                <MenuItem value="Virtual">Envío express</MenuItem>
+              </Select>
+            </FormControl>
+            <Button
+              onClick={() => {
+                setselectedCategoriaPrincipal(null);
+                setSelectedSubcategoria(null);
+              }}
+              sx={{ gap: 1.3 }}
+            >
+              <SettingsBackupRestoreIcon />
+              Restaurar
+            </Button>
+          </Box>
+          <Box>{renderResults()}</Box>
+          <Box display="flex" justifyContent="space-around" alignItems="center">
+            <Button variant="contained" sx={{ margin: '10px' }} onClick={handleShowMoreClick}>
+              Mostrar más
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </>
+  );
+};
+
+export default Home;
