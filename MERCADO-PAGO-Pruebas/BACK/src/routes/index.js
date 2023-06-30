@@ -4,6 +4,7 @@ const { crearProducto, obtenerProductos,obtenerProductoPorId,actualizarProducto,
 const { obtenerCarritoCompra,agregarProductoCarrito,eliminarProductoCarrito } = require('../controllers/carritoController.js');
 const { obtenerCategorias, crearCategoria, obtenerCategoriaPorId, actualizarCategoria, eliminarCategoria } = require('../controllers/categoriaController.js');
 //const autenticacionMiddleware = require('../middlewares/authToken.js');
+const { createPaymentPreference, handlePaymentNotification, receiveWebhook } = require("../controllers/payamentController2.js")
 const router = Router();
 
 // Rutas de productos
@@ -25,6 +26,14 @@ router.post('/categoriasCrear', /*autenticacionMiddleware,*/ crearCategoria);
 router.get('/categorias/:id', obtenerCategoriaPorId);
 router.put('/categorias/:id', /*autenticacionMiddleware,*/ actualizarCategoria);
 router.delete('/categorias/:id', /*autenticacionMiddleware,*/ eliminarCategoria);
+
+// Rutas pagos 
+router.post("/create-order", createPaymentPreference);
+router.post('/payment-notification', handlePaymentNotification);
+router.post("/webhook", receiveWebhook);
+router.get("/success", (req, res) => res.send("Success"));
+router.get("/pending", (req, res) => res.send("Pending"));
+router.get("/failure", (req, res) => res.send("Failure"));
 
 // Rutas de usuarios
 //router.use(usuarioRoutes);
