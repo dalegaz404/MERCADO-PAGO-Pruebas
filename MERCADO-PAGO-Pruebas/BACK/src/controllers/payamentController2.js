@@ -36,6 +36,7 @@ const transporter = nodemailer.createTransport({
       },
       external_reference: usuarioId.toString(), // Puedes utilizar el ID del usuario como referencia externa
       back_urls: {
+        //Aca tenes que poner la URL del deploy 
         ssuccess: "http://localhost:3001/success",
         pending: "http://localhost:3001/pending",
         failure: "http://localhost:3001/failure",
