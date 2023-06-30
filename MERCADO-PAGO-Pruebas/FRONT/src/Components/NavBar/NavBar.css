@@ -1,5 +1,80 @@
 .navbar {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: rgb(248, 227, 227);
+  height: 150px;
+  margin-bottom: 20px;
+}
+.cajaLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  height: 40px;
+}
+.busqueda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 63%;
+}
+.carrito {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+  color: aliceblue;
+  width: 20%;
+}
+.carritoLogo {
+  height: 83px;
+  width: 88px;
+}
+.caja1 {
+  display: flex;
+  justify-content: center;
+  height: 98px;
+}
+.caja1A {
+  display: flex;
+  width: 62%;
+  height: 98px;
+}
+.caja2 {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(71, 71, 71);
+  display: flex;
+}
+.caja2B {
+  display: flex;
+  width: 62%;
+  height: 65px;
+}
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 0, 0);
+  width: 9%;
+}
+.imagenHome {
+  width: 35px;
+  height: 33px;
+}
+.categorias {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 72%;
+  color: aliceblue;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.actividades {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  width: 20.5%;
+  color: aliceblue;
 }
