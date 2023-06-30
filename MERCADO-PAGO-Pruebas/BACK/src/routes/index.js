@@ -10,12 +10,12 @@ router.use(productoRoutes);
 
 // Rutas de usuarios
 router.use(usuarioRoutes);
-const getCategorias = require('../controllers/getCategoria.js');
-const getProduct = require('../controllers/getProduct');
-const getProductById = require('../controllers/getProdById');
-const postProductos = require('../controllers/postProd1');
-const getUsers = require('../controllers/getUsers');
-const createUser = require('../controllers/postUsers');
+// const getCategorias = require('../controllers/getCategoria.js');
+// const getProduct = require('../controllers/getProduct');
+// const getProductById = require('../controllers/getProdById');
+// const postProductos = require('../controllers/postProd1');
+// const getUsers = require('../controllers/getUsers');
+// const createUser = require('../controllers/postUsers');
 const { Router } = require('express');
 const productos   = require('../db.js');
 
@@ -25,17 +25,17 @@ router.use(carritoRoutes);
 // Rutas de categorías
 router.use(categoriaRoutes);
 
-router.get("/categ",  getCategorias);
+// router.get("/categ",  getCategorias);
 
-router.get("/fakeprod", getProduct);
+// router.get("/fakeprod", getProduct);
 
-router.get('/productos/:id', getProductById);
+// router.get('/productos/:id', getProductById);
 
-router.post("/postprod",  postProductos );
+// router.post("/postprod",  postProductos );
 
-router.get('/users', getUsers);
+// router.get('/users', getUsers);
 
-router.post('/users', createUser);
+// router.post('/users', createUser);
 
 
 router.get('/productos', (req, res) => {
