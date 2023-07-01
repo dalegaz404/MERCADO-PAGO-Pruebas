@@ -1,6 +1,9 @@
 const { Usuario, carrocompra, Producto, OrdenCompra } = require('../db');
 const mercadopago = require('mercadopago'); // Importa la configuración de Mercado Pago
 const nodemailer = require('nodemailer');
+require("dotenv").config();
+const { ACCESS_TOKEN } = process.env;
+
 
 // Configurar las opciones de envío de correo electrónico
 const transporter = nodemailer.createTransport({
@@ -9,6 +12,10 @@ const transporter = nodemailer.createTransport({
     user: 'tu_correo@gmail.com',
     pass: 'tu_contraseña',
   },
+});
+
+mercadopago.configure({
+  access_token: ACCESS_TOKEN, // Reemplaza con tu clave de acceso privada
 });
 
 
