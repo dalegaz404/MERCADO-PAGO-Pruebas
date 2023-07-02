@@ -29,12 +29,12 @@ router.delete('/categorias/:id', /*autenticacionMiddleware,*/ eliminarCategoria)
 
 // Rutas pagos 
 router.post("/create-order", createPaymentPreference);
-router.post('/payment-notification', handlePaymentNotification);
-router.post("/webhook", receiveWebhook);
+
 router.get("/success", (req, res) => res.send("Success"));
 router.get("/pending", (req, res) => res.send("Pending"));
 router.get("/failure", (req, res) => res.send("Failure"));
 
+router.post('/payment-notification', handlePaymentNotification);
 // Rutas de usuarios
 //router.use(usuarioRoutes);
 // Rutas del carrito de compra
