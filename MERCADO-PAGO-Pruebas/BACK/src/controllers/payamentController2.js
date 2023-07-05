@@ -21,25 +21,26 @@ mercadopago.configure({
 
 const createPaymentPreference = async (req, res) => {
   try {
-    const { client_id } = req.body;
+    const { usuarioId, productoId, cantidad, returnUrl, cancelUrl } = req.body;
+    
+    // // Buscar el usuario en la base de datos
+     const usuario = await Usuario.findByPk(usuarioId);
 
-    // Buscar el usuario en la base de datos
-    const usuario = await Usuario.findByPk(client_id);
+    // // Buscar el producto en la base de datos
+     const producto = await Producto.findByPk(productoId);
 
-    // Buscar el producto en la base de datos
-    const producto = await Producto.findOne();
 
     // Crear la preferencia de pago utilizando la información obtenida
     const preference = {
       items: [
         {
-          title: producto.nombre,
-          unit_price: producto.precio,
+          title: producto. nombreproducto,
+          unit_price: producto.precioproducto,
           quantity: 1,
         },
       ],
       payer: {
-        email: usuario.email,
+        email: "test_user_200519321@testuser.com",
       },
       notification_url: "http://localhost:3001/payment-notification",
       external_reference: client_id.toString(),
@@ -103,7 +104,7 @@ const receiveWebhook = async (req, res) => {
         // Enviar correo electrónico de confirmación al usuario
         const mailOptions = {
           from: 'all.market.henry@gmail.com',
-          to: usuario.email,
+          to: usuario.login,
           subject: 'Confirmación de compra',
           text: `¡Gracias por tu compra! Tu orden ${orden.numero} ha sido confirmada.`,
         };

@@ -1,6 +1,6 @@
 const { Producto } = require('../db.js');
 
-const productValidations = require('../validations/productValidations');
+//const productValidations = require('../validations/productValidations');
 // Controlador para obtener todos los productos
 async function obtenerProductos(req, res) {
   const { page, limit } = req.query;
@@ -47,19 +47,12 @@ const crearProducto = async (req, res) => {
       fotosecund,
       categoria
     });
-     productValidations.validateNombreProducto({nombreproducto});
-     productValidations.validateDescProducto({descproducto});
-     productValidations.validateColorProducto({colorproducto});
-     productValidations.validateFotoPrinc({fotoprinc});
-     productValidations.validatePrecioProducto({precioproducto});
-     productValidations.validateDisponibProducto({disponibproducto});
-     productValidations.validateFotoSecund({fotosecund});
-     productValidations.validateCategoria({categoria});
+    
 
     res.status(201).json(newProduct);
   } catch (error) {
     console.error('Error al crear un nuevo producto:', error);
-    res.status(500).json({ error: 'Error al crear un nuevo producto' });
+    res.status(500).json({ error: message.error });
   }
 };
 
